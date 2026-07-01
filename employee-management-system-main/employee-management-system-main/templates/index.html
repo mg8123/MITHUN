@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Employee Management System</h1>
+
+<form action="/add" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="department" placeholder="Department" required>
+    <input type="number" name="salary" placeholder="Salary" required>
+    <input type="email" name="email" placeholder="Email">
+    <input type="text" name="phone" placeholder="Phone">
+    <button type="submit">Add Employee</button>
+</form>
+
+<hr>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for emp in employees %}
+    <tr>
+        <form action="/update/{{ emp[0] }}" method="POST">
+            <td>{{ emp[0] }}</td>
+            <td><input type="text" name="name" value="{{ emp[1] }}"></td>
+            <td><input type="text" name="department" value="{{ emp[2] }}"></td>
+            <td><input type="number" name="salary" value="{{ emp[3] }}"></td>
+            <td><input type="email" name="email" value="{{ emp[4] }}"></td>
+            <td><input type="text" name="phone" value="{{ emp[5] }}"></td>
+            <td>
+                <button type="submit">Update</button>
+                <a href="/delete/{{ emp[0] }}">Delete</a>
+            </td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
